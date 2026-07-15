@@ -1,0 +1,169 @@
+Variable
+Barn ID
+Barn Name
+Ear Tag Code
+Registration Number
+Registration Name
+Chain Number
+Location Pen Number
+Nomination ID
+Order Number
+Order Date
+Lab Status
+Lab Status Date
+Genotyped
+Current group
+Initial group
+Birth Date
+Due Date
+Calving Date
+Type
+Lact. Number
+Preg Status
+No. Services
+Inb.%
+Genomic Inb. %
+R-Value
+Sire Semen Code
+Sire Reg Number
+Sire Name
+Dam
+MGS Semen Code
+MGS Reg Number
+MGS Name
+GMGS Semen Code
+GMGS Reg Number
+GMGS Name
+Proof Source
+Evaluation date
+Immunity
+Calf
+LPI
+paLPI
+Pro$
+paPro$
+Client Index
+paClient Index
+PROD
+HEALTH
+L-TYPE
+REPRO
+M-ABILITY
+ENVIRO
+Milk (kg)
+Fat (kg)
+%Fat
+Prot (kg)
+%Prot
+FE
+BMR
+ME
+SCS
+HL
+MR
+MDR
+HH
+LP
+DF
+MSp
+MTemp
+CA
+DCA
+BCS
+CO
+CH
+Conf
+MS
+FL
+DS
+RU
+UD
+UT
+MSu
+UF
+FA
+TL
+FTP
+RTP
+RAH
+RAW
+FAng
+HD
+LOC
+FLV
+RLSV
+RLRV
+BQ
+STA
+HFE
+CW
+BD
+RS
+RAng
+PW
+LS
+TP
+Polled Test
+Color Test
+BLAD
+BY
+CIT
+CVM
+DUMPS
+MF
+HH1
+HH2
+HH3
+HH4
+HH5
+HH6
+HCD
+HMW
+A2 Test
+KappaBB
+Lactoglobulin
+BetaCasein
+AY%
+BS%
+GU%
+HO%
+JE%
+Parent conflict
+Parent discovered
+Original Sire Semen Code
+Original Sire Reg Number
+Original Sire Name
+Original Dam Reg Number
+Original MGS Semen Code
+Original MGS Reg Number
+Original MGS Name
+Barn ID_Immunity
+Barn Name_Immunity
+Ear Tag Code_Immunity
+Registration Name_Immunity
+Birth Date_Immunity
+Immunity_Immunity
+Calf_Immunity
+Barn ID_BvdTest
+Barn Name_BvdTest
+Ear Tag Code_BvdTest
+Registration Name_BvdTest
+Birth Date_BvdTest
+Bvd Test_BvdTest
+Barn ID_A2 Test
+Barn Name_A2 Test
+Ear Tag Code_A2 Test
+Registration Name_A2 Test
+Birth Date_A2 Test
+A2 Test_A2 Test
+Barn ID_Milk Proteins
+Barn Name_Milk Proteins
+Ear Tag Code_Milk Proteins
+Registration Name_Milk Proteins
+Birth Date_Milk Proteins
+A2A2_Milk Proteins
+KappaBB_Milk Proteins
+BetaCasein_Milk Proteins
+Lactoglobulin_Milk Proteins
+year
+RP

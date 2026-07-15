@@ -1,0 +1,121 @@
+trait_1,trait_2,r
+MS,Conf,0.874
+LPI,Pro$,0.872
+%Fat,%Prot,0.849
+Fat (kg),Pro$,0.816
+Pro$,Prot (kg),0.809
+%Fat,Fat (kg),0.795
+Fat (kg),Prot (kg),0.785
+Fat (kg),LPI,0.719
+Conf,FL,0.696
+Prot (kg),LPI,0.684
+%Prot,Fat (kg),0.65
+DS,Conf,0.635
+Prot (kg),Milk (kg),0.59
+Conf,RU,0.58
+LPI,HL,0.572
+%Prot,Pro$,0.568
+Pro$,HL,0.559
+%Fat,Pro$,0.557
+SCS,HL,0.537
+FL,LPI,0.537
+Prot (kg),%Prot,0.519
+LPI,%Fat,0.506
+DS,RU,0.5
+%Prot,LPI,0.495
+LPI,Conf,0.484
+SCS,Pro$,0.447
+LPI,MS,0.439
+MS,FL,0.434
+%Fat,Milk (kg),-0.405
+%Prot,Milk (kg),-0.383
+%Fat,Prot (kg),0.369
+FL,RU,0.368
+MS,DS,0.349
+Milk (kg),Pro$,0.341
+HL,FL,0.336
+LPI,SCS,0.306
+RU,MS,0.301
+FL,DS,0.301
+Genomic Inb. %,LPI,0.297
+SCS,DS,-0.278
+LPI,Milk (kg),0.275
+Genomic Inb. %,Pro$,0.254
+Milk (kg),DS,0.253
+Prot (kg),Genomic Inb. %,0.249
+Genomic Inb. %,Fat (kg),0.235
+Fat (kg),Milk (kg),0.231
+DS,HL,-0.226
+SCS,%Prot,0.217
+%Fat,SCS,0.211
+FL,Pro$,0.204
+Fat (kg),SCS,0.199
+HL,Fat (kg),0.186
+LPI,DS,0.177
+HL,%Fat,0.165
+Genomic Inb. %,FL,0.16
+Genomic Inb. %,HL,0.159
+HL,%Prot,0.158
+Milk (kg),Genomic Inb. %,0.155
+SCS,Prot (kg),0.154
+Prot (kg),DS,0.152
+MS,HL,0.151
+HL,Prot (kg),0.15
+%Prot,RU,-0.142
+Genomic Inb. %,Conf,0.14
+HL,Conf,0.132
+Fat (kg),DS,0.13
+DS,Genomic Inb. %,0.12
+FL,Fat (kg),0.118
+Genomic Inb. %,%Prot,0.114
+%Fat,Genomic Inb. %,0.114
+RU,LPI,0.113
+Genomic Inb. %,SCS,0.11
+%Prot,DS,-0.102
+%Fat,FL,0.094
+RU,Pro$,-0.09
+RU,Genomic Inb. %,0.079
+Pro$,MS,0.079
+Conf,Pro$,0.077
+Prot (kg),RU,-0.077
+%Fat,RU,-0.076
+SCS,Conf,-0.075
+MS,Genomic Inb. %,0.067
+Conf,%Prot,-0.065
+Conf,Milk (kg),0.058
+Prot (kg),MS,-0.057
+RU,Fat (kg),-0.048
+Milk (kg),RU,0.046
+Conf,Fat (kg),0.045
+Pro$,DS,-0.045
+FL,Prot (kg),0.044
+Milk (kg),SCS,-0.038
+DS,%Fat,-0.038
+Milk (kg),MS,-0.035
+SCS,RU,-0.031
+RU,HL,-0.029
+%Prot,MS,-0.029
+FL,Milk (kg),0.025
+%Prot,FL,0.024
+FL,SCS,0.02
+Milk (kg),HL,0.019
+MS,%Fat,0.013
+Fat (kg),MS,-0.012
+SCS,MS,-0.008
+Conf,%Fat,0.006
+Prot (kg),Conf,-0.0
+LPI,LPI,
+Pro$,Pro$,
+Milk (kg),Milk (kg),
+Fat (kg),Fat (kg),
+%Fat,%Fat,
+Prot (kg),Prot (kg),
+%Prot,%Prot,
+SCS,SCS,
+HL,HL,
+Conf,Conf,
+MS,MS,
+FL,FL,
+DS,DS,
+RU,RU,
+Genomic Inb. %,Genomic Inb. %,
