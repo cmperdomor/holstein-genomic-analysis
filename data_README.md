@@ -3,7 +3,7 @@
 ## The real dataset is not published
 
 The analysis in this repository was performed on a **commercial genomic export from a
-private Canadian Holstein herd** (668 animals × 138 variables, Semex/Lactanet
+private Canadian Holstein herd** (668 animals × 138 variables, Semex
 evaluations, July 2026). That file contains identifiable farm and animal records and is
 **not included here**.
 
