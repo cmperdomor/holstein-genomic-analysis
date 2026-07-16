@@ -30,11 +30,11 @@ This means:
 
 | | |
 |---|---|
-| ✅ The code executes without errors | loading, cleaning, grouping, plotting, testing all work |
-| ✅ Distributions look plausible | LPI ≈ 3,253 vs 3,243 real; Fat ≈ 42.9 vs 42.5 real |
-| ❌ **Correlations are absent** | e.g. `r(Stature, Milk)` = −0.07 (ns) here vs the real dataset's structure |
-| ❌ **Trends are absent** | cohort slopes will be flat and non-significant |
-| ❌ **No conclusion in the README can be re-derived from this file** | by design |
+| ye, The code executes without errors | loading, cleaning, grouping, plotting, testing all work |
+| yes Distributions look plausible | LPI ≈ 3,253 vs 3,243 real; Fat ≈ 42.9 vs 42.5 real |
+| no **Correlations are absent** | e.g. `r(Stature, Milk)` = −0.07 (ns) here vs the real dataset's structure |
+| no **Trends are absent** | cohort slopes will be flat and non-significant |
+| no **No conclusion in the README can be re-derived from this file** | by design |
 
 This is deliberate. A synthetic file that reproduced the real correlation structure
 would effectively republish the confidential dataset's information content.
