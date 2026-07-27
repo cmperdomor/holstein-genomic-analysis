@@ -1,0 +1,255 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "7e85419d",
+   "metadata": {},
+   "source": [
+    "# 04 - Genomic Trends\n",
+    "\n",
+    "**Question:** How have genomic evaluations changed across birth-year cohorts, and how do\n",
+    "pedigree and genomic inbreeding compare?\n",
+    "\n",
+    "All values are genomic breeding values, not measured performance. Cohort means from one\n",
+    "herd on a single evaluation date; not a modelled genetic trend. Cohorts before 2018\n",
+    "excluded (n=1 each). The public repo ships only `data/sample_synthetic.csv`, which\n",
+    "reproduces structure but not correlations, so these findings reproduce only on the real\n",
+    "export."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "fadeb7f2",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-07-27T15:23:38.958698Z",
+     "iopub.status.busy": "2026-07-27T15:23:38.958582Z",
+     "iopub.status.idle": "2026-07-27T15:23:41.728233Z",
+     "shell.execute_reply": "2026-07-27T15:23:41.727084Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Loaded (668, 139)\n"
+     ]
+    }
+   ],
+   "source": [
+    "import warnings; warnings.filterwarnings(\"ignore\")\n",
+    "from pathlib import Path\n",
+    "import pandas as pd, numpy as np\n",
+    "from scipy import stats\n",
+    "hits=[p for base in [Path(\".\"),Path(\"..\"),Path(\"../..\")] if base.exists()\n",
+    "      for p in base.rglob(\"Master_Database*.xlsx\")]\n",
+    "df=pd.read_excel(hits[0],sheet_name=\"Data\",header=1).dropna(how=\"all\") if hits else pd.read_csv(\"../data/sample_synthetic.csv\")\n",
+    "df.columns=[c.strip() for c in df.columns]\n",
+    "df[\"year\"]=pd.to_datetime(df[\"Birth Date\"],errors=\"coerce\").dt.year\n",
+    "for c in [\"LPI\",\"Pro$\",\"Fat (kg)\",\"Genomic Inb. %\",\"Inb.%\"]:\n",
+    "    df[c]=pd.to_numeric(df[c],errors=\"coerce\")\n",
+    "print(\"Loaded\",df.shape)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ebd1147d",
+   "metadata": {},
+   "source": [
+    "## 1. Selection indexes and production across cohorts"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "94b9eae4",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-07-27T15:23:41.730279Z",
+     "iopub.status.busy": "2026-07-27T15:23:41.730050Z",
+     "iopub.status.idle": "2026-07-27T15:23:41.741868Z",
+     "shell.execute_reply": "2026-07-27T15:23:41.740957Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "LPI         2919.1 ->  3492.3  slope=  +71.9/yr  r2=0.94  p=0.0000  (+20%)\n",
+      "Pro$         658.2 ->  1608.8  slope= +110.0/yr  r2=0.86  p=0.0003  (+144%)\n",
+      "Fat (kg)      11.8 ->    61.3  slope=   +5.7/yr  r2=0.95  p=0.0000  (+417%)\n"
+     ]
+    }
+   ],
+   "source": [
+    "sub=df[df.year>=2018]\n",
+    "for c in [\"LPI\",\"Pro$\",\"Fat (kg)\"]:\n",
+    "    s=sub.groupby(\"year\")[c].mean().dropna(); r=stats.linregress(s.index,s.values)\n",
+    "    pct=(s.iloc[-1]-s.iloc[0])/abs(s.iloc[0])*100\n",
+    "    print(f\"{c:10s} {s.iloc[0]:7.1f} -> {s.iloc[-1]:7.1f}  slope={r.slope:+7.1f}/yr  r2={r.rvalue**2:.2f}  p={r.pvalue:.4f}  ({pct:+.0f}%)\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f3cc9369",
+   "metadata": {},
+   "source": [
+    "**Result.** Mean genomic merit rose across cohorts: LPI 2,919 to 3,492 (+20%), Pro$ 658\n",
+    "to 1,609 (+144%), Fat 11.8 to 61.3 kg (r2=0.95). This describes cohort means, not a\n",
+    "modelled genetic trend, and does not by itself establish that a specific intentional\n",
+    "strategy produced it."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cf6e4705",
+   "metadata": {},
+   "source": [
+    "## 2. Inbreeding: pedigree vs genomic, same animals and same period\n",
+    "\n",
+    "Earlier drafts compared a genomic slope over 2021-2026 against a pedigree slope over a\n",
+    "longer window, and claimed genomic rose \"53% faster\". That comparison used different\n",
+    "periods and is invalid. Here both measures are computed on **the same 489 animals** that\n",
+    "carry both values, over **the same 2021+ period**, and the difference in slopes is tested\n",
+    "directly."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "3ffaac07",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-07-27T15:23:41.744056Z",
+     "iopub.status.busy": "2026-07-27T15:23:41.743440Z",
+     "iopub.status.idle": "2026-07-27T15:23:41.758953Z",
+     "shell.execute_reply": "2026-07-27T15:23:41.757970Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "      Genomic Inb. %  Inb.%    gap\n",
+      "year                              \n",
+      "2021          10.180  6.620  3.560\n",
+      "2022          11.566  8.082  3.485\n",
+      "2023          11.918  8.725  3.192\n",
+      "2024          12.330  8.890  3.440\n",
+      "2025          12.595  8.625  3.970\n",
+      "2026          13.370  9.027  4.343 \n",
+      "\n",
+      "genomic slope  = +0.556/yr (p=0.0022)\n",
+      "pedigree slope = +0.395/yr (p=0.0440)\n",
+      "gap slope      = +0.161/yr (p=0.1067)  <- NOT significant\n"
+     ]
+    }
+   ],
+   "source": [
+    "d=df[df[\"Genomic Inb. %\"].notna()&df[\"Inb.%\"].notna()].copy()\n",
+    "d[\"gap\"]=d[\"Genomic Inb. %\"]-d[\"Inb.%\"]\n",
+    "dp=d[d.year>=2021]\n",
+    "g=dp.groupby(\"year\")[[\"Genomic Inb. %\",\"Inb.%\",\"gap\"]].mean()\n",
+    "print(g.round(3).to_string(),\"\\n\")\n",
+    "gs=stats.linregress(g.index,g[\"Genomic Inb. %\"]); ps=stats.linregress(g.index,g[\"Inb.%\"]); gaps=stats.linregress(g.index,g[\"gap\"])\n",
+    "print(f\"genomic slope  = {gs.slope:+.3f}/yr (p={gs.pvalue:.4f})\")\n",
+    "print(f\"pedigree slope = {ps.slope:+.3f}/yr (p={ps.pvalue:.4f})\")\n",
+    "print(f\"gap slope      = {gaps.slope:+.3f}/yr (p={gaps.pvalue:.4f})  <- {'significant' if gaps.pvalue<0.05 else 'NOT significant'}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e76dac30",
+   "metadata": {},
+   "source": [
+    "**Result (same animals, same period).** Genomic inbreeding rose +0.556/yr and pedigree\n",
+    "+0.395/yr over 2021-2026. Genomic increased numerically faster, but the annual increase\n",
+    "in their **difference** was **not statistically significant** (+0.161/yr, p = 0.107). The\n",
+    "claim that one rises \"53% faster\" is not supported and has been removed."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e921ef62",
+   "metadata": {},
+   "source": [
+    "## 3. Bland-Altman: how much do the two measures disagree per animal?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "a42337e1",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-07-27T15:23:41.760925Z",
+     "iopub.status.busy": "2026-07-27T15:23:41.760350Z",
+     "iopub.status.idle": "2026-07-27T15:23:41.767306Z",
+     "shell.execute_reply": "2026-07-27T15:23:41.766502Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "n paired = 489\n",
+      "paired correlation r = 0.684  (pedigree explains 47% of genomic variance)\n",
+      "Bland-Altman mean difference (genomic - pedigree) = 3.68 points\n",
+      "95% limits of agreement = [-1.33, 8.69]\n",
+      "animals below 8% on pedigree but at/above 8% on genomic = 210\n"
+     ]
+    }
+   ],
+   "source": [
+    "paired_r=stats.pearsonr(d[\"Inb.%\"],d[\"Genomic Inb. %\"])[0]\n",
+    "mean_gap=d[\"gap\"].mean(); sd_gap=d[\"gap\"].std()\n",
+    "loa=(mean_gap-1.96*sd_gap, mean_gap+1.96*sd_gap)\n",
+    "safe=int(((d[\"Inb.%\"]<8)&(d[\"Genomic Inb. %\"]>=8)).sum())\n",
+    "print(f\"n paired = {len(d)}\")\n",
+    "print(f\"paired correlation r = {paired_r:.3f}  (pedigree explains {paired_r**2*100:.0f}% of genomic variance)\")\n",
+    "print(f\"Bland-Altman mean difference (genomic - pedigree) = {mean_gap:.2f} points\")\n",
+    "print(f\"95% limits of agreement = [{loa[0]:.2f}, {loa[1]:.2f}]\")\n",
+    "print(f\"animals below 8% on pedigree but at/above 8% on genomic = {safe}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f83db3ff",
+   "metadata": {},
+   "source": [
+    "**Result.** The two measures correlate r = 0.68 (pedigree explains 47% of genomic\n",
+    "variance), so they capture **related but different quantities**: pedigree estimates\n",
+    "*expected* inbreeding from known relationships, genomic estimates *realized* homozygosity\n",
+    "from markers. The mean genomic-minus-pedigree difference is +3.68 points, with wide\n",
+    "limits of agreement [-1.33, 8.69]. **210 animals** sit below 8% on pedigree but at or\n",
+    "above 8% on genomic.\n",
+    "\n",
+    "**Interpretation, stated carefully.** Pedigree is not the \"wrong instrument\"; both are\n",
+    "valid estimates of different quantities. But they disagree substantially at the\n",
+    "individual-animal level, and mating decisions based on pedigree alone would misclassify\n",
+    "those 210 animals."
+   ]
+  }
+ ],
+ "metadata": {
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

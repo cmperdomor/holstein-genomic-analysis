@@ -1,0 +1,22 @@
+# ---- CONFIDENTIAL DATA — never commit ----
+*.xlsx
+*.xls
+data/*.csv
+!data/sample_synthetic.csv
+Master_Database_Consolidated_Final.xlsx
+*_Export_*.xlsx
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
