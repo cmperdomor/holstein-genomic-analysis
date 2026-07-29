@@ -1,0 +1,56 @@
+# Final Summary
+
+## What changed this round (all fourteen points applied and re-executed)
+
+All four notebooks were edited in code and/or markdown and re-executed on the real
+confidential dataset. The delivered files reflect these changes; the audit documents were
+rebuilt from scratch against the executed outputs.
+
+## Claims removed for lack of support
+- "Timed AI, R=0.5, sires re-rank" (not in Oliveira 2021).
+- "$63/daughter BMR" economic figure (no located cell; Lactanet's about $70 per +5 RBV
+  points over three lactations remains only as a published citation).
+- Conformation-redundancy claims and "about 10 conformation dimensions" (no supporting
+  analysis; the VIF is production-block only).
+
+## Claims corrected
+- Fertility LPI weight 13% to about 9% (Reproduction Index 10% times Daughter Fertility 90%).
+- Inbreeding discordance: 210 to 212 of 489 (210 one direction, 2 the other), now computed
+  in nb04.
+- Mediation: from "BMR ruled out / association is real" to "no statistically detectable
+  indirect effect; indirect effect opposite in sign to total, CI included zero."
+- Body-size clustered result: broken line fixed to three full coefficients.
+- Dispersion slope +3.70 to +4.61/yr after fixing the bootstrap cohort set (conclusion
+  unchanged).
+
+## Language softened
+- Dependence: sire clustering "reduces, but does not eliminate" family and cohort dependence.
+- Interaction: "no statistically distinguishable difference detected", five proof
+  categories, no joint F-test claimed.
+- TOST: "added during review and not preregistered"; margins are sensitivity analyses, not
+  validated thresholds.
+- Cohort changes reported as absolute (percentages and r-squared not used as headlines).
+
+## Method fixes
+- Interaction model builds SireID after dropna (no "nan" cluster).
+- nb06 bootstrap: eligible cohorts fixed once at n>=30, used in observed and every
+  replicate; reps unified to 2000; separate RNG objects for RI and dispersion, seed=42.
+- SIZE composite sensitivity: single-trait tests added (Stature, Body Depth, HFE, Chest
+  Width) so the each-single-trait statement is backed.
+
+## Results kept unchanged (verified PASS on real data)
+Cohort changes; production-block VIF; interaction p=0.20; PCA 5-of-6; silhouette 0.146;
+balance 21 (3.1%); inbreeding slopes and gap p=0.107; Bland-Altman; adjusted size models
+for Milk (null), Fat and Protein; TOST at both margins; percentile trends; FDR results;
+leave-one-out dispersion driven by L-TYPE.
+
+## Points not fully resolvable with these data (stated honestly, not in headlines)
+- Fertility validation against own phenotype: low power (ceiling correlation roughly 0.2
+  from low heritability). Specific required-sample figure removed as non-reproducible.
+- Full relationship structure (maternal, sire-sire, genomic matrix) is not modelled;
+  sire clustering is a partial control.
+
+## Reproducibility
+Code runs on the synthetic sample for structural testing, but the synthetic file does not
+preserve the real correlation structure, so the scientific findings reproduce only on the
+confidential dataset.
